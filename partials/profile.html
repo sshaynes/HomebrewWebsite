@@ -1,5 +1,9 @@
+<div ng-header></div>
+
 <p>This is the partial for the profile page.</p>
 <p>
   Showing of 'interpolate' filter:
-  {{ 'Current version is v%VERSION%.' | interpolate }}
+  {[{ 'Current version is v%VERSION%.' | interpolate }]}
 </p>
+
+<div ng-footer></div>

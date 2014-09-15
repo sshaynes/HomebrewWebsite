@@ -1,19 +1,8 @@
-  <header>
-    <nav class="navbar navbar-default">
-      <div class="container">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="#/home">ImpossiBrew</a>
-        </div>
+<div ng-header></div>
 
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="#/auth"><i class="fa fa-shield"></i> Log In</a></li>
-          <li><a href="#/profile">Profile</a></li>
-          <li><input type="text" placeholder="Search" /><a href="#/search">search</a></li>
-        </ul>
-      </div>
-    </nav>
-  </header>
-
+<!-- Setting up main container -->
+<div class="middle">
+  <div class="container">
 
 <!-- Show results from RESTful API Calls -->
 <div class="page-header col-md-8">
@@ -31,7 +20,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="action in apicalls.actions | orderBy: 'action'">
+      <tr ng-repeat="action in apicalls.actions | orderBy: 'name'">
         <td>{[{action.name}]}</td>
         <td>{[{action.response}]}</td>
       </tr>
@@ -76,3 +65,9 @@
 
 </div>
 
+
+<!-- Closing main container -->
+  </div><!-- /.container -->
+</div><!-- /.middle -->
+
+<div ng-footer></div>
