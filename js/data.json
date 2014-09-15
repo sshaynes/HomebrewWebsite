@@ -1,0 +1,6 @@
+[{ "action": "Find a brew pot",  "done": true},
+{ "action": "Buy a large funnel",    "done": false},
+{ "action": "Purchase malt extract", "done": true},
+{ "action": "Purchase brewers yeast", "done": false},
+{ "action": "Setup brewing event", "done": false}
+]

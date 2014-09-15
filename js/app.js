@@ -1,17 +1,34 @@
 'use strict';
 
-
 // Declare app level module which depends on filters, and services
-angular.module('myApp', [
+var brewApp = angular.module('brewApp', [
   'ngRoute',
-  'myApp.filters',
-  'myApp.services',
-  'myApp.directives',
-  'myApp.controllers'
-]).
+  'brewApp.filters',
+  'brewApp.services',
+  'brewApp.directives',
+  'brewApp.controllers'
+], function ($interpolateProvider) {
+        $interpolateProvider.startSymbol("{[{");
+        $interpolateProvider.endSymbol("}]}");
+}).
 config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/home', {templateUrl: 'partials/home.html', controller: 'home'});
-  $routeProvider.when('/profile', {templateUrl: 'partials/profile.html', controller: 'profile'});
-  $routeProvider.when('/auth', {templateUrl: 'partials/auth.html', controller: 'auth'});
-  $routeProvider.otherwise({redirectTo: '/home'});
+  $routeProvider.
+    when('/home', {
+      templateUrl: 'static/partials/home.html',
+      controller: 'home'
+    });
+  $routeProvider.
+    when('/profile', {
+      templateUrl: 'static/partials/profile.html',
+      controller: 'profile'
+    });
+  $routeProvider.
+    when('/auth', {
+      templateUrl: 'static/partials/auth.html',
+      controller: 'auth'
+    });
+  $routeProvider.
+    otherwise({
+      redirectTo: '/home'
+    });
 }]);

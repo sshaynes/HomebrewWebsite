@@ -1,1 +1,78 @@
-<p>This is the partial for the homepage.</p>
+  <header>
+    <nav class="navbar navbar-default">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#/home">ImpossiBrew</a>
+        </div>
+
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#/auth"><i class="fa fa-shield"></i> Log In</a></li>
+          <li><a href="#/profile">Profile</a></li>
+          <li><input type="text" placeholder="Search" /><a href="#/search">search</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+
+<!-- Show results from RESTful API Calls -->
+<div class="page-header col-md-8">
+  <h1>
+    RESTful API Calls
+  </h1>
+</div>
+
+<div class="panel col-md-8">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+      <th>Description</th>
+      <th>Response</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="action in apicalls.actions | orderBy: 'action'">
+        <td>{[{action.name}]}</td>
+        <td>{[{action.response}]}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<!-- Sample dynamic To Do list for testing -->
+
+<div class="page-header col-md-8">
+  <h1>
+    {[{todo.user}]}'s To Do List (UserID: {[{todo.userId}]})
+  </h1>
+</div>
+
+<div class="panel col-md-8">
+  <div class="input-group">
+    <input class="form-control" ng-model="actionTitle" />
+    <span class="input-group-btn">
+      <button class="btn btn-default" ng-click="addNewItem(actionTitle)">Add</button>
+    </span>
+  </div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+      <th>Description</th>
+      <th>Done</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="item in todo.items | checkedItems:showComplete | orderBy: 'action'">
+        <td>{[{item.action}]}</td>
+        <td><input type="checkbox" ng-model="item.done"/></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="checkbox-inline">
+    <label for="showComplete"><input id="showComplete" type="checkbox" ng-model="showComplete"> Show Complete</label>
+  </div>
+
+</div>
+
