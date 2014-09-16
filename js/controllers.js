@@ -9,9 +9,17 @@ angular.module('brewApp.controllers', [])
     var restApi = {};
     restApi.actions = [{}];
 
-    $http.get("auth/login/").success(function (login) {
+    $http({
+      url: 'auth/login/',
+      method: "GET",
+      data: 'James Doe',
+    }).success(function (login) {
       restApi.actions.push({name:'login', response: login});
     });
+
+    // $http.get("auth/login/").success(function (login) {
+    //   restApi.actions.push({name:'login', response: login});
+    // });
 
     $http.get("auth/logout/").success(function (logout) {
       restApi.actions.push({name:'logout', response: logout});
