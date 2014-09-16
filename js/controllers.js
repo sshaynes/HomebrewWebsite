@@ -12,14 +12,32 @@ angular.module('brewApp.controllers', [])
     $http({
       url: 'auth/login/',
       method: "GET",
-      data: 'James Doe',
+      params: {
+        user: 'James Doe',
+        password: 'IAnyOPbXrZhDbe0Li762ZFeDSKL4LKdk'
+      }
     }).success(function (login) {
-      restApi.actions.push({name:'login', response: login});
+      restApi.actions.push({name:'login_GET', response: login});
+    }).
+    error(function(data, status, headers, config) {
+      // called asynchronously if an error occurs
+      // or server returns response with an error status.
+      restApi.actions.push({name:'login_GET', response: 'ERROR: ' + status});
     });
 
-    // $http.get("auth/login/").success(function (login) {
-    //   restApi.actions.push({name:'login', response: login});
-    // });
+    $http({
+      url: 'auth/login/',
+      method: "POST",
+      data: 'James Doe',
+    }).success(function (login) {
+      restApi.actions.push({name:'login_POST', response: login});
+    }).
+    error(function(data, status, headers, config) {
+      // called asynchronously if an error occurs
+      // or server returns response with an error status.
+      restApi.actions.push({name:'login_POST', response: 'ERROR: ' + status});
+    });
+
 
     $http.get("auth/logout/").success(function (logout) {
       restApi.actions.push({name:'logout', response: logout});
