@@ -38,8 +38,12 @@ config([
         controller: 'profile'
       });
     $routeProvider.
-      when('/auth', {
-        templateUrl: 'static/partials/auth.html',
+      when('/login', {
+        templateUrl: 'static/partials/login.html',
+        controller: 'auth'
+      }).
+      when('/register', {
+        templateUrl: 'static/partials/register.html',
         controller: 'auth'
       });
     $routeProvider.
@@ -51,7 +55,7 @@ run([
   '$http',
   '$cookies',
   function($http, $cookies) {
-    // Assign the CSFR token to each ajax call automagically
+    // Assign the CSRF token to each ajax call automagically
     $http.defaults.headers.post['X-CSRFToken'] = $cookies.csrftoken;
 }]);
 

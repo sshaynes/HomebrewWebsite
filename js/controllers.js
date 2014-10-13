@@ -13,7 +13,7 @@ angular.module('brewApp.controllers', [])
       url: 'auth/login/',
       method: "GET",
       params: {
-        user: 'James Doe',
+        user: 'Mike Doe',
         password: 'IAnyOPbXrZhDbe0Li762ZFeDSKL4LKdk'
       }
     }).success(function (login) {
@@ -28,7 +28,10 @@ angular.module('brewApp.controllers', [])
     $http({
       url: 'auth/login/',
       method: "POST",
-      data: 'James Doe',
+      data: [
+        {'user': 'James Bond'},
+        {'pass': 'ZCQSVkNDO9vnhh5Ggcp7pj8QfdMCsyJ7'}
+      ],
     }).success(function (login) {
       restApi.actions.push({name:'login_POST', response: login});
     }).

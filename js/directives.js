@@ -12,7 +12,7 @@ directive('ngHeader', function () {
     return {
         restrict: 'A', //This will be used as attribute and NOT as an element
         replace: true,
-        scope: {user: '='}, // This is one of the cool things :). Will be explained in post.
+        scope: {user: '='},
         templateUrl: "/static/partials/header.html",
         controller: ['$scope', '$filter', function ($scope, $filter) {
             // Behaviour goes here :)

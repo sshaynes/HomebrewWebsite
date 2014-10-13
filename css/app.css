@@ -1,5 +1,20 @@
 /* app css stylesheet */
 
+body {
+  font-size: 16px;
+}
+
+.navbar-default, .main-footer {
+  background-color: #F8F8F8;
+  border-color: #E7E7E7;
+}
+
+.main-footer {
+  height: 80px;
+  border-top: 1px solid #E7E7E7;
+  padding:15px;
+}
+
 .menu {
   list-style: none;
   border-bottom: 0.1em solid black;
@@ -27,4 +42,108 @@
 .menu > li:nth-child(1):before {
   content: "";
   padding: 0;
+}
+
+
+/* Overwriting Bootstrap Styles */
+/* ============================ */
+
+/* Login Form */
+.form-signin
+{
+  max-width: 330px;
+  padding: 7px;
+  margin: 0 auto;
+}
+.form-signin .form-signin-heading, .form-signin .checkbox
+{
+  margin-bottom: 10px;
+}
+.form-signin .checkbox
+{
+  font-weight: normal;
+}
+
+.form-signin .form-control
+{
+  position: relative;
+  font-size: 16px;
+  height: auto;
+  padding: 10px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.form-signin .form-control:focus
+{
+  z-index: 2;
+}
+.form-signin input[type="text"]
+{
+
+}
+.form-signin input[type="email"]
+{
+
+}
+.form-signin input[type="password"]
+{
+
+}
+.form-signin .form-top{
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.form-signin .form-middle{
+  border-radius: 0;
+  margin:-1px 0 0 0;
+}
+.form-signin .form-bottom{
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  margin-top: -1px;
+  margin-bottom: 10px;
+}
+.account-wall
+{
+  margin-top: 20px;
+  padding: 40px 0px 20px 0px;
+  background-color: #f7f7f7;
+  -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+}
+.login-title
+{
+  color: #555;
+  font-weight: 400;
+  display: block;
+}
+
+
+/* Main styles */
+/* =========== */
+
+a {
+  color: #3268AE;
+}
+
+a:hover, a:focus{
+  color: #205496;
+}
+
+.btn-primary {
+  background-color: #3268AE;
+  border-color: #1E5499;
+}
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary{
+  background-color: #205496;
+  border-color: #143D71;
+}
+
+.middle {
+  /*padding-bottom: 90px;*/
+  min-height: 500px;
+  margin-bottom: 40px;
 }
