@@ -125,7 +125,7 @@ body {
 /* =========== */
 
 a {
-  color: #3268AE;
+color: #3982C2;
 }
 
 a:hover, a:focus{
@@ -133,13 +133,13 @@ a:hover, a:focus{
 }
 
 .btn-primary {
-  background-color: #3268AE;
-  border-color: #1E5499;
+  background-color: #428BCA;
+  border-color: #357EBD;
 }
 
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary{
-  background-color: #205496;
-  border-color: #143D71;
+  background-color: #3276B1;
+  border-color: #285E8E;
 }
 
 .middle {
