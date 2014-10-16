@@ -54,8 +54,28 @@ angular.module('brewApp.controllers', [])
       restApi.actions.push({name:'isSessionActive', response: isSessionActive});
     });
 
-    $http.get("user/create/").success(function (usersCreate) {
-      restApi.actions.push({name:'usersCreate', response: usersCreate});
+
+    // Testing User Create API
+    $http({
+      url: 'user/create/',
+      method: "POST",
+      data:
+        {
+          user: 'james_bond1',
+          password: '123',
+          age: '26',
+          location: 'Philadelphia',
+          name: 'James Bond',
+          yearsExperience: '4',
+          avatarURL: 'http://avatar.com'
+        },
+    }).success(function (login) {
+      restApi.actions.push({name:'userCreate_POST', response: login});
+    }).
+    error(function(data, status, headers, config) {
+      // called asynchronously if an error occurs
+      // or server returns response with an error status.
+      restApi.actions.push({name:'userCreate_POST', response: 'ERROR: ' + status + "/ " + data});
     });
 
     $http.get("user/delete/").success(function (usersDelete) {
@@ -104,5 +124,32 @@ angular.module('brewApp.controllers', [])
 
   }])
   .controller('auth', ['$scope', function($scope) {
+
+    $scope.userRegister = function()
+    {
+      $http({
+        url: 'user/create/',
+        method: "POST",
+        data:
+          {
+            user: 'james_bond1',
+            password: '123',
+            age: '26',
+            location: 'Philadelphia',
+            name: 'James Bond',
+            yearsExperience: '4',
+            avatarURL: 'http://avatar.com'
+          },
+      }).success(function (login) {
+        restApi.actions.push({name:'userCreate_POST', response: login});
+      }).
+      error(function(data, status, headers, config) {
+        // called asynchronously if an error occurs
+        // or server returns response with an error status.
+        restApi.actions.push({name:'userCreate_POST', response: 'ERROR: ' + status + "/ " + data});
+      });
+    }
+
+
 
   }]);
