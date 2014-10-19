@@ -33,7 +33,7 @@ angular.module('brewApp.services', [])
           method: "POST",
           data:
             {
-              user: 'james_bond2',
+              user: 'james_bond3',
               password: '123',
               age: '26',
               location: 'Philadelphia',
@@ -50,9 +50,7 @@ angular.module('brewApp.services', [])
           restApi.actions.push({name:'userCreate_POST', response: 'ERROR: ' + status + "/ " + data});
         });
 
-        return {
-
-        }
+        return restApi;
 
       },
       getAllUsers: function()
