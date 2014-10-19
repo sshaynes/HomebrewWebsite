@@ -33,13 +33,13 @@ angular.module('brewApp.services', [])
           method: "POST",
           data:
             {
-              user: 'james_bond3',
+              user: 'james_bond2',
               password: '123',
-              // age: '26',
-              // location: 'Philadelphia',
-              // name: 'James Bond',
-              // yearsExperience: '4',
-              // avatarURL: 'http://avatar.com'
+              age: '26',
+              location: 'Philadelphia',
+              name: 'James Bond',
+              yearsExperience: '4',
+              avatarURL: 'http://avatar.com'
             },
         }).success(function (login) {
           restApi.actions.push({name:'userCreate_POST', response: login});
@@ -50,7 +50,9 @@ angular.module('brewApp.services', [])
           restApi.actions.push({name:'userCreate_POST', response: 'ERROR: ' + status + "/ " + data});
         });
 
-        return restApi;
+        return {
+
+        }
 
       },
       getAllUsers: function()
