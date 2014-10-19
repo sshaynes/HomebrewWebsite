@@ -1,6 +1,14 @@
 /* app css stylesheet */
 
 body {
+  /*font-size: 16px;*/
+}
+
+body > .container {
+  padding: 60px 15px 0;
+}
+
+h5 {
   font-size: 16px;
 }
 
@@ -9,9 +17,17 @@ body {
   border-color: #E7E7E7;
 }
 
-.main-footer {
-  height: 80px;
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 60px;
   border-top: 1px solid #E7E7E7;
+  background-color: #F8F8F8;
+  border-color: #E7E7E7;
+}
+
+.main-footer {
   padding:15px;
 }
 
@@ -146,4 +162,17 @@ a:hover, a:focus{
   /*padding-bottom: 90px;*/
   min-height: 500px;
   margin-bottom: 40px;
+}
+
+
+.message-pane {
+  margin: 20px 0;
+  padding: 15px 30px 15px 15px;
+  border-top: 5px solid #EEE;
+}
+
+.message-pane-error {
+  background-color: #FCF2F2;
+  border-color: #DFB5B4;
+  color: #B94A48;
 }
