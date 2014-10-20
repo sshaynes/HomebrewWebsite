@@ -22,35 +22,40 @@ angular.module('brewApp.services', [])
 
   .factory('userRepository', ['$http', function($http)
   {
-    var restApi = {};
-    restApi.actions = [{}];
+    // status: code
+    // message: error message
+    var apiResponses = {};
+    apiResponses.actions = [{}];
     return {
-      registerNewUser: function()
+      registerNewUser: function(formData)
       {
+
         // Testing User Create API
         $http({
           url: 'user/create/',
           method: "POST",
           data:
             {
-              user: 'james_bond3',
-              password: '123',
+              user: formData.username,
+              password: formData.password,
+              email: formData.email,
               age: '26',
               location: 'Philadelphia',
-              name: 'James Bond',
               yearsExperience: '4',
               avatarURL: 'http://avatar.com'
             },
-        }).success(function (login) {
-          restApi.actions.push({name:'userCreate_POST', response: login});
+        }).
+        success(function (response) {
+          apiResponses = {status: response.status, message: response.message};
         }).
         error(function(data, status, headers, config) {
           // called asynchronously if an error occurs
           // or server returns response with an error status.
-          restApi.actions.push({name:'userCreate_POST', response: 'ERROR: ' + status + "/ " + data});
+          console.log('ERROR: ' + status + " - " + data);
+          apiResponses = {status: response.status, message: response.message};
         });
 
-        return restApi;
+        return apiResponses;
 
       },
       getAllUsers: function()
@@ -63,12 +68,12 @@ angular.module('brewApp.services', [])
             password: 'IAnyOPbXrZhDbe0Li762ZFeDSKL4LKdk'
           }
         }).success(function (login) {
-          restApi.actions.push({name:'login_GET', response: login});
+          apiResponses.actions.push({name:'login_GET', response: login});
         }).
         error(function(data, status, headers, config) {
           // called asynchronously if an error occurs
           // or server returns response with an error status.
-          restApi.actions.push({name:'login_GET', response: 'ERROR: ' + status});
+          apiResponses.actions.push({name:'login_GET', response: 'ERROR: ' + status});
         });
 
         $http({
@@ -79,43 +84,43 @@ angular.module('brewApp.services', [])
             {'pass': 'ZCQSVkNDO9vnhh5Ggcp7pj8QfdMCsyJ7'}
           ],
         }).success(function (login) {
-          restApi.actions.push({name:'login_POST', response: login});
+          apiResponses.actions.push({name:'login_POST', response: login});
         }).
         error(function(data, status, headers, config) {
           // called asynchronously if an error occurs
           // or server returns response with an error status.
-          restApi.actions.push({name:'login_POST', response: 'ERROR: ' + status});
+          apiResponses.actions.push({name:'login_POST', response: 'ERROR: ' + status});
         });
 
 
         $http.get("auth/logout/").success(function (logout) {
-          restApi.actions.push({name:'logout', response: logout});
+          apiResponses.actions.push({name:'logout', response: logout});
         });
 
         $http.get("auth/passwordReset/").success(function (passwordReset) {
-          restApi.actions.push({name:'passwordReset', response: passwordReset});
+          apiResponses.actions.push({name:'passwordReset', response: passwordReset});
         });
 
         $http.get("auth/isSessionActive/").success(function (isSessionActive) {
-          restApi.actions.push({name:'isSessionActive', response: isSessionActive});
+          apiResponses.actions.push({name:'isSessionActive', response: isSessionActive});
         });
 
 
 
 
         $http.get("user/delete/").success(function (usersDelete) {
-          restApi.actions.push({name:'usersDelete', response: usersDelete});
+          apiResponses.actions.push({name:'usersDelete', response: usersDelete});
         });
 
         $http.get("user/updatePassword/").success(function (updatePassword) {
-          restApi.actions.push({name:'updatePassword', response: updatePassword});
+          apiResponses.actions.push({name:'updatePassword', response: updatePassword});
         });
 
         $http.get("user/updateProfile/").success(function (updateProfile) {
-          restApi.actions.push({name:'updateProfile', response: updateProfile});
+          apiResponses.actions.push({name:'updateProfile', response: updateProfile});
         });
 
-        return restApi;
+        return apiResponses;
       }
     };
  }]);

@@ -6,8 +6,8 @@ angular.module('brewApp.controllers', [])
   .controller('home', ['$scope', '$http', '$log', 'githubService', 'userRepository',
   function($scope, $http, $log, githubService, userRepository)
   {
-    // $scope.apicalls = userRepository.getAllUsers();
-    $scope.apicalls = userRepository.registerNewUser();
+    $scope.apicalls = userRepository.getAllUsers();
+    // $scope.apicalls = userRepository.registerNewUser();
 
     // This is a sample To Do list
     var model = {
@@ -39,57 +39,53 @@ angular.module('brewApp.controllers', [])
   .controller('profile', ['$scope', function($scope) {
 
   }])
-  .controller('auth', ['$scope', function($scope) {
+  .controller('auth', ['$scope', '$location', 'userRepository', function($scope, $location, userRepository) {
 
     $scope.formData = {};
 
     $scope.userRegister = function()
     {
-      console.log($scope.formData);
-
       var errorsArr = [];
 
       if (!$scope.formData.username) {
-        errorsArr.push('Username Required');
+        errorsArr.push('Username Required!');
       }
 
       if (!$scope.formData.email) {
-        errorsArr.push('Email is Required');
+        errorsArr.push('Email is Required!');
       }
 
       if (!$scope.formData.password) {
-        errorsArr.push('Password is Required');
+        errorsArr.push('Password is Required!');
       }
 
       if (!$scope.formData.confirmPassword) {
-        errorsArr.push('Password Confirmation is Required');
+        errorsArr.push('Password Confirmation is Required!');
+      }
+
+      if($scope.formData.password !== $scope.formData.confirmPassword) {
+        errorsArr.push('Passwords do NOT match!');
       }
 
       $scope.formErrors = errorsArr;
 
-      console.log($scope.formErrors);
+      var response = {};
 
-      // $http({
-      //   url: 'user/create/',
-      //   method: "POST",
-      //   data:
-      //     {
-      //       user: 'james_bond1',
-      //       password: '123',
-      //       age: '26',
-      //       location: 'Philadelphia',
-      //       name: 'James Bond',
-      //       yearsExperience: '4',
-      //       avatarURL: 'http://avatar.com'
-      //     },
-      // }).success(function (login) {
-      //   restApi.actions.push({name:'userCreate_POST', response: login});
-      // }).
-      // error(function(data, status, headers, config) {
-      //   // called asynchronously if an error occurs
-      //   // or server returns response with an error status.
-      //   restApi.actions.push({name:'userCreate_POST', response: 'ERROR: ' + status + "/ " + data});
-      // });
+      // No errors, register user
+      if(errorsArr.length == 0){
+        // $location.path('/home');
+        // Figure out how to deal with the async execution of this method.
+        var response = userRepository.registerNewUser($scope.formData);
+      }
+
+      // Extract the value and create an array of status codes
+      if(response.status == 200) {
+        console.log("Success: " + response.status + " - " + response.message);
+        $location.path('/home');
+      }else{
+        console.log("Fail: " + response.status + " - " + response.message);
+      }
+
     }
 
 
