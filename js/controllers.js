@@ -6,7 +6,7 @@ angular.module('brewApp.controllers', [])
   .controller('home', ['$scope', '$http', '$log', 'githubService', 'userRepository',
   function($scope, $http, $log, githubService, userRepository)
   {
-    $scope.apicalls = userRepository.getAllUsers();
+    $scope.arrApiResponses = userRepository.getAllUsers();
     // $scope.apicalls = userRepository.registerNewUser();
 
     // This is a sample To Do list
@@ -43,51 +43,104 @@ angular.module('brewApp.controllers', [])
 
     $scope.formData = {};
 
-    $scope.userRegister = function()
+    $scope.userRegister = function(formData)
     {
       var errorsArr = [];
+      var response = {};
 
-      if (!$scope.formData.username) {
-        errorsArr.push('Username Required!');
+      if (!formData.username) {
+        errorsArr.push('Username is Required!');
       }
 
-      if (!$scope.formData.email) {
+      if (!formData.email) {
         errorsArr.push('Email is Required!');
       }
 
-      if (!$scope.formData.password) {
+      if (!formData.password) {
         errorsArr.push('Password is Required!');
       }
 
-      if (!$scope.formData.confirmPassword) {
+      if (!formData.confirmPassword) {
         errorsArr.push('Password Confirmation is Required!');
       }
 
-      if($scope.formData.password !== $scope.formData.confirmPassword) {
+      if(formData.password !== $scope.formData.confirmPassword) {
         errorsArr.push('Passwords do NOT match!');
       }
 
       $scope.formErrors = errorsArr;
 
-      var response = {};
-
       // No errors, register user
-      if(errorsArr.length == 0){
-        // $location.path('/home');
-        // Figure out how to deal with the async execution of this method.
-        var response = userRepository.registerNewUser($scope.formData);
-      }
+      if(errorsArr.length == 0)
+      {
+        userRepository.registerNewUser($scope.formData).then(function(httpRes)
+        {
+          // Returns an HTTP Response object
+          // Extract response data
+          var response = httpRes.data;
 
-      // Extract the value and create an array of status codes
-      if(response.status == 200) {
-        console.log("Success: " + response.status + " - " + response.message);
-        $location.path('/home');
-      }else{
-        console.log("Fail: " + response.status + " - " + response.message);
+          // Extract the value and create an array of status codes
+          if(response.status == 200) {
+            console.log("Success: " + response.status + " - " + response.message);
+            $location.path('/profile');
+          }else{
+            console.log("Fail: " + response.status + " - " + response.message);
+            // Figure out a way to display error message when this fails
+            errorsArr.push('Error!');
+
+          }
+        },function(httpRes){
+          console.log("Unknown server error: " + httpRes.status + "\n" + httpRes.data);
+        });
       }
 
     }
 
 
+
+    $scope.userLogin = function(formData)
+    {
+      var errorsArr = [];
+      var response = {};
+      // $scope.formErrors = [];
+
+      // if (!$scope.formData.email) {
+      //   errorsArr.push('Email is Required!');
+      // }
+
+      if (!formData.username) {
+        errorsArr.push('Username is Required!');
+      }
+
+      if (!formData.password) {
+        errorsArr.push('Password is Required!');
+      }
+
+      $scope.formErrors = errorsArr;
+
+      // No errors, register user
+      if(errorsArr.length == 0)
+      {
+        userRepository.loginUser($scope.formData).then(function(httpRes)
+        {
+          // Returns an HTTP Response object
+          // Extract response data
+          response = httpRes.data;
+
+          // Extract the value and create an array of status codes
+          if(response.status == 200) {
+            console.log("Success: " + response.status + " - " + response.message);
+            $location.path('/profile');
+          }else{
+            console.log("Fail: " + response.status + " - " + response.message);
+            // Figure out a way to display error message when this fails
+            errorsArr.push('Invalid Username or Password. Please try again!');
+            // console.log(errorsArr);
+          }
+        },function(httpRes){
+          console.log("Unknown server error: " + httpRes.status + "\n" + httpRes.data);
+        });
+      }
+    }
 
   }]);
