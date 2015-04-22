@@ -100,6 +100,7 @@ angular.module('brewApp.services', [])
 
       loginUser: function(formData)
       {
+
         // Testing User Create API
         return $http({
           url: 'auth/login/',
@@ -125,6 +126,8 @@ angular.module('brewApp.services', [])
 
       getAllUsers: function()
       {
+        arrApiResponses = [{}];
+
         $http({
           url: 'auth/login/',
           method: "GET",
