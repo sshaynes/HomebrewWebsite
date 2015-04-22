@@ -2,12 +2,101 @@
 <div class="middle">
   <div class="container">
 
-  <p>This is the partial for the profile page.</p>
-  <p>
-    Showing of 'interpolate' filter:
-    {[{ 'Current version is v%VERSION%.' | interpolate }]}
-  </p>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-2">
 
-<!-- Closing main container -->
+          <div class="message-pane message-pane-error alert-dismissable" ng-show="formErrors">
+            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h5>There were errors during login:</h5>
+            <ul>
+              <li ng-repeat="error in formErrors">{[{ error }]}</li>
+            </ul>
+          </div>
+
+          <div class="panel panel-info">
+            <div class="panel-heading">
+              <h3 class="panel-title">User Profile</h3>
+            </div>
+
+            <div class="panel-body">
+              <form class="form-horizontal" role="form" ng-submit="editUserProfile(userProfile)">
+                <fieldset>
+
+                  <!-- Field -->
+                  <div class="form-group">
+                    <label for="first_name" class="col-lg-4 control-label">First Name</label>
+                    <div class="col-lg-8">
+                      <input class="form-control" placeholder="First Name" name="first_name" type="text" ng-model="userProfile.first_name">
+                    </div>
+                  </div>
+
+                  <!-- Field -->
+                  <div class="form-group">
+                    <label for="last_name" class="col-lg-4 control-label">Last Name</label>
+                    <div class="col-lg-8">
+                      <input class="form-control" placeholder="Last Name" name="last_name" type="text" ng-model="userProfile.last_name">
+                    </div>
+                  </div>
+
+                  <!-- Field -->
+                  <div class="form-group">
+                    <label for="age" class="col-lg-4 control-label">Age</label>
+                    <div class="col-lg-8">
+                      <input class="form-control" placeholder="Age" name="age" type="text" ng-model="userProfile.age">
+                    </div>
+                  </div>
+
+                  <!-- Field -->
+                  <div class="form-group">
+                    <label for="experience" class="col-lg-4 control-label">Experience (years)</label>
+                    <div class="col-lg-8">
+                      <input class="form-control" placeholder="Experience (years)" name="experience" type="text" ng-model="userProfile.experience">
+                    </div>
+                  </div>
+
+                  <!-- Field -->
+                  <div class="form-group">
+                    <label for="username" class="col-lg-4 control-label">Username</label>
+                    <div class="col-lg-8">
+                      <input class="form-control" placeholder="Username" name="username" type="text" ng-model="userProfile.username">
+                    </div>
+                  </div>
+
+                  <!-- Field -->
+                  <div class="form-group">
+                    <label for="email" class="col-lg-4 control-label">Email</label>
+                    <div class="col-lg-8">
+                      <input class="form-control" disabled placeholder="Email" name="email" type="text" ng-model="userProfile.email">
+                    </div>
+                  </div>
+
+                  <!-- Field -->
+                  <div class="form-group">
+                    <label for="password" class="col-lg-4 control-label">New Password</label>
+                    <div class="col-lg-8">
+                      <input class="form-control" placeholder="New Password" name="password" type="password" ng-model="userProfile.password">
+                    </div>
+                  </div>
+
+                  <!-- Field -->
+                  <div class="form-group">
+                    <label for="confirm_password" class="col-lg-4 control-label">Confirm Password</label>
+                    <div class="col-lg-8">
+                      <input class="form-control" placeholder="Confirm Password" name="confirm_password" type="password" ng-model="userProfile.confirm_password">
+                    </div>
+                  </div>
+
+                  <button class="btn btn-lg btn-success btn-block" type="submit">Update</button>
+                </fieldset>
+              </form>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  <!-- Closing main container -->
   </div><!-- /.container -->
-</div><!-- /.middle -->
+</div><!-- /.middle

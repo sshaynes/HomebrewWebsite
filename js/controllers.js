@@ -36,9 +36,26 @@ angular.module('brewApp.controllers', [])
       $scope.todo.items.push({action: actionTitle, done: false});
     }
   }])
+
   .controller('profile', ['$scope', function($scope) {
+    var userProfile = {};
+
+    userProfile.username = "ztyankov";
+    userProfile.first_name = "Zdravko";
+    userProfile.last_name = "Tyankov";
+    userProfile.experience = 149;
+    userProfile.email = "ztiankov@gmail.com";
+
+    $scope.userProfile = userProfile;
+
+    $scope.editUserProfile = function(formData)
+    {
+      var errorsArr = [];
+      console.log(formData);
+    }
 
   }])
+
   .controller('auth', ['$scope', '$location', 'userRepository', function($scope, $location, userRepository) {
 
     $scope.formData = {};
