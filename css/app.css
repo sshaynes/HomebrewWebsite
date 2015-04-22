@@ -142,6 +142,7 @@ footer {
   display: block;
 }
 
+
 /* ===========
   Main styles
   =========== */
@@ -170,6 +171,17 @@ a:hover, a:focus{
   margin-bottom: 40px;
 }
 
+
+.form-search {
+/*  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);*/
+}
+
+#search-top {
+  padding: 1px 4px;
+  margin: 12px 5px;
+}
 
 /* ===================
   Message panes/panels
