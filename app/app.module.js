@@ -22,7 +22,8 @@
          */
         // 'app.dashboard',
         'app.layout',
-        // 'app.user'
+        'app.home',
+        'app.user'
     ]);
 
 })();

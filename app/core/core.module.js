@@ -9,9 +9,9 @@
         /*
          * Our reusable cross app code modules
          */
-        // 'shared.exception',
+        'shared.exception',
         'shared.logger',
-        // 'shared.router',
+        'shared.router',
         /*
          * 3rd Party modules
          */

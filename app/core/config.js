@@ -12,10 +12,10 @@
     }
 
     var config = {
-        appErrorPrefix: '[NG-Modular Error] ', //Configure the exceptionHandler decorator
+        appErrorPrefix: '[BrewBold Error] ', //Configure the exceptionHandler decorator
         appTitle: 'BrewBold',
         appWelcomeMessage: 'Welcome to BrewBold!!',
-        version: '1.0.0'
+        version: '0.1.0'
     };
 
     core.value('config', config);
@@ -26,18 +26,25 @@
 
     /* @ngInject */
     // function configure ($logProvider, $routeProvider, $httpProvider, $interpolateProvider, routehelperConfigProvider, exceptionHandlerProvider) {
-    function configure ($logProvider, $routeProvider, $httpProvider, $interpolateProvider) {
+    function configure ($logProvider, $routeProvider, $httpProvider, $interpolateProvider, routehelperConfigProvider, exceptionHandlerProvider) {
         // turn debugging off/on (no info or warn)
         if ($logProvider.debugEnabled) {
             $logProvider.debugEnabled(true);
         }
 
         // Configure the common route provider
-        // routehelperConfigProvider.config.$routeProvider = $routeProvider;
-        // routehelperConfigProvider.config.docTitle = 'NG-Modular: ';
+        routehelperConfigProvider.config.$routeProvider = $routeProvider;
+        routehelperConfigProvider.config.docTitle = config.appTitle + ': ';
+
+        var resolveAlways = { /* @ngInject */
+            ready: function(UserRepository) {
+                return UserRepository.ready();
+            }
+        };
+        routehelperConfigProvider.config.resolveAlways = resolveAlways;
 
         // Configure the common exception handler
-        // exceptionHandlerProvider.configure(config.appErrorPrefix);
+        exceptionHandlerProvider.configure(config.appErrorPrefix);
 
         // Setting new interpolation signs for AngularJS in order to play nice with Django
         // Django - {{ }}

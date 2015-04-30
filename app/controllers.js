@@ -38,21 +38,21 @@ angular.module('brewApp.controllers', [])
   }])
 
   .controller('profile', ['$scope', function($scope) {
-    var userProfile = {};
+    // var userProfile = {};
 
-    userProfile.username = "ztyankov";
-    userProfile.first_name = "Zdravko";
-    userProfile.last_name = "Tyankov";
-    userProfile.experience = 149;
-    userProfile.email = "ztiankov@gmail.com";
+    // userProfile.username = "ztyankov";
+    // userProfile.first_name = "Zdravko";
+    // userProfile.last_name = "Tyankov";
+    // userProfile.experience = 149;
+    // userProfile.email = "ztiankov@gmail.com";
 
-    $scope.userProfile = userProfile;
+    // $scope.userProfile = userProfile;
 
-    $scope.editUserProfile = function(formData)
-    {
-      var errorsArr = [];
-      console.log(formData);
-    }
+    // $scope.editUserProfile = function(formData)
+    // {
+    //   var errorsArr = [];
+    //   console.log(formData);
+    // }
 
   }])
 

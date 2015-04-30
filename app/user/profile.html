@@ -20,14 +20,14 @@
             </div>
 
             <div class="panel-body">
-              <form class="form-horizontal" role="form" ng-submit="editUserProfile(userProfile)">
+              <form class="form-horizontal" role="form" ng-submit="vm.editUserProfile(userProfile)">
                 <fieldset>
 
                   <!-- Field -->
                   <div class="form-group">
                     <label for="first_name" class="col-lg-4 control-label">First Name</label>
                     <div class="col-lg-8">
-                      <input class="form-control" placeholder="First Name" name="first_name" type="text" ng-model="userProfile.first_name">
+                      <input class="form-control" placeholder="First Name" name="first_name" type="text" ng-model="vm.userProfile.first_name">
                     </div>
                   </div>
 
@@ -35,7 +35,7 @@
                   <div class="form-group">
                     <label for="last_name" class="col-lg-4 control-label">Last Name</label>
                     <div class="col-lg-8">
-                      <input class="form-control" placeholder="Last Name" name="last_name" type="text" ng-model="userProfile.last_name">
+                      <input class="form-control" placeholder="Last Name" name="last_name" type="text" ng-model="vm.userProfile.last_name">
                     </div>
                   </div>
 
@@ -43,7 +43,7 @@
                   <div class="form-group">
                     <label for="age" class="col-lg-4 control-label">Age</label>
                     <div class="col-lg-8">
-                      <input class="form-control" placeholder="Age" name="age" type="text" ng-model="userProfile.age">
+                      <input class="form-control" placeholder="Age" name="age" type="text" ng-model="vm.userProfile.age">
                     </div>
                   </div>
 
@@ -51,7 +51,7 @@
                   <div class="form-group">
                     <label for="experience" class="col-lg-4 control-label">Experience (years)</label>
                     <div class="col-lg-8">
-                      <input class="form-control" placeholder="Experience (years)" name="experience" type="text" ng-model="userProfile.experience">
+                      <input class="form-control" placeholder="Experience (years)" name="experience" type="text" ng-model="vm.userProfile.experience">
                     </div>
                   </div>
 
@@ -59,7 +59,7 @@
                   <div class="form-group">
                     <label for="username" class="col-lg-4 control-label">Username</label>
                     <div class="col-lg-8">
-                      <input class="form-control" placeholder="Username" name="username" type="text" ng-model="userProfile.username">
+                      <input class="form-control" placeholder="Username" name="username" type="text" ng-model="vm.userProfile.username">
                     </div>
                   </div>
 
@@ -67,7 +67,7 @@
                   <div class="form-group">
                     <label for="email" class="col-lg-4 control-label">Email</label>
                     <div class="col-lg-8">
-                      <input class="form-control" disabled placeholder="Email" name="email" type="text" ng-model="userProfile.email">
+                      <input class="form-control" disabled placeholder="Email" name="email" type="text" ng-model="vm.userProfile.email">
                     </div>
                   </div>
 
@@ -75,7 +75,7 @@
                   <div class="form-group">
                     <label for="password" class="col-lg-4 control-label">New Password</label>
                     <div class="col-lg-8">
-                      <input class="form-control" placeholder="New Password" name="password" type="password" ng-model="userProfile.password">
+                      <input class="form-control" placeholder="New Password" name="password" type="password" ng-model="vm.userProfile.password">
                     </div>
                   </div>
 
@@ -83,7 +83,7 @@
                   <div class="form-group">
                     <label for="confirm_password" class="col-lg-4 control-label">Confirm Password</label>
                     <div class="col-lg-8">
-                      <input class="form-control" placeholder="Confirm Password" name="confirm_password" type="password" ng-model="userProfile.confirm_password">
+                      <input class="form-control" placeholder="Confirm Password" name="confirm_password" type="password" ng-model="vm.userProfile.confirm_password">
                     </div>
                   </div>
 
