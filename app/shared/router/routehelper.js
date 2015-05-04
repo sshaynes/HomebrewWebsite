@@ -92,7 +92,9 @@
             return routes;
         }
 
-        function updateDocTitle() {
+        // Setup the page title through the document title
+        function updateDocTitle()
+        {
             $rootScope.$on('$routeChangeSuccess',
                 function(event, current, previous) {
                     routeCounts.changes++;

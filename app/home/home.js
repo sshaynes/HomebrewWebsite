@@ -17,7 +17,7 @@
         activate();
 
         function activate() {
-            // logger.success('Home' + ' loaded!', null);
+            logger.success('HomeView' + ' loaded!', null);
         }
 
     };
