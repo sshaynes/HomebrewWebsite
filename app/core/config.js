@@ -22,11 +22,11 @@
 
     core.config(configure);
 
-    core.run(scrfTokenConfigure);
+    // core.run(csrfTokenConfigure);
 
     /* @ngInject */
     // function configure ($logProvider, $routeProvider, $httpProvider, $interpolateProvider, routehelperConfigProvider, exceptionHandlerProvider) {
-    function configure ($logProvider, $routeProvider, $httpProvider, $interpolateProvider, routehelperConfigProvider, exceptionHandlerProvider) {
+    function configure ($logProvider, $routeProvider, $httpProvider, $interpolateProvider, routehelperConfigProvider, exceptionHandlerProvider, csrfCDProvider) {
         // turn debugging off/on (no info or warn)
         if ($logProvider.debugEnabled) {
             $logProvider.debugEnabled(true);
@@ -58,6 +58,13 @@
         // Set default headers in order to use Django helper method is_ajax() in views
         $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
+        // Django default name
+        csrfCDProvider.setHeaderName('X-CSRFToken');
+        csrfCDProvider.setCookieName('CSRFToken');
+
+        // You can even configure HTTP methods to set csrf
+        csrfCDProvider.setAllowedMethods(['GET', 'POST', 'HEAD']);
+
         // $routeProvider.
         //   when('/home', {
         //     templateUrl: 'static/partials/home.html',
@@ -83,8 +90,13 @@
         //   });
     }
 
-    function scrfTokenConfigure($http, $cookies){
+    function csrfTokenConfigure($http, $cookies){
+
         $http.defaults.headers.post['X-CSRFToken'] = $cookies.csrftoken;
+        $http.defaults.headers.put['X-CSRFToken'] = $cookies.csrftoken;
+
+        // $http.defaults.headers.post['X-CSRFToken'] = $cookies.csrftoken;
+        console.log($cookies.csrftoken);
     }
 
 })();

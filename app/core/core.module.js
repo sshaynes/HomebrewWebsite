@@ -15,6 +15,7 @@
         /*
          * 3rd Party modules
          */
-        'ngplus'
+        'ngplus',
+        'csrf-cross-domain'
     ]);
 })();
