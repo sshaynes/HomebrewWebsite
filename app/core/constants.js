@@ -14,6 +14,9 @@
             notAuthenticated: 'auth-not-authenticated',
             notAuthorized: 'auth-not-authorized'
         })
+        .constant('CLIENT_URLS',{
+            userProfile: '/profile'
+        })
         .constant('USER_ROLES', {
             all: '*',
             admin: 'admin',
