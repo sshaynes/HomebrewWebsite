@@ -12,6 +12,8 @@
 
         var service = {
             getUserProfileData: getUserProfileData,
+            createNewUserAccount: createNewUserAccount,
+            validateUserRegistration: validateUserRegistration,
             ready: ready
         };
 
@@ -27,19 +29,82 @@
             userProfile.experience = 149;
             userProfile.email = "ztiankov@gmail.com";
 
-            return userProfile;
-
-            // return $http.get('/api/maa')
-            //     .then(getAvengersComplete)
-            //     .catch(function(message) {
-            //         exception.catcher('XHR Failed for getAvengers')(message);
-            //         $location.url('/');
-            //     });
-
-            // function getAvengersComplete(data, status, headers, config) {
-            //     return data.data[0].data.results;
-            // }
+            return $q.when(userProfile);
         }
+
+
+        /**
+         * Send a request to the server to create a new user account
+         *
+         * @param  array formData - user form data
+         * @return object response - contains a status code and a message
+         */
+        function createNewUserAccount(formData) {
+            // Testing User Create API
+            return $http({
+                url: 'user/create/',
+                method: "POST",
+                data:
+                {
+                    user: formData.username,
+                    password: formData.password,
+                    email: formData.email,
+                    age: '26',
+                    location: 'Philadelphia',
+                    yearsExperience: '4',
+                    avatarURL: 'http://avatar.com'
+                },
+            }).
+            success(function (response) {
+                if(response.status == 200){
+                    logger.success("User creation was successful!\n" + response);
+                    return {status: response.status, message: response.message};
+                }
+                else {
+                    logger.error("User creation failed!\n" + response.status + ": " + response.message);
+                    return $q.reject({status: response.status, message: response.message});
+                }
+            }).
+            error(function(response) {
+                logger.error("User creation API call failed!\n" + response.status + ": " + response.message);
+                return $q.reject(data);
+            });
+        }
+
+
+        /**
+         * Validate the user input and return a list of errors if any
+         *
+         * @param  array formData - user form data
+         * @return array - list of errors if any
+         */
+        function validateUserRegistration(formData){
+            var errorsArr = [];
+
+            if (!formData.username) {
+                errorsArr.push('Username is Required!');
+            }
+
+            if (!formData.email) {
+                errorsArr.push('Email is Required!');
+            }
+
+            if (!formData.password) {
+                errorsArr.push('Password is Required!');
+            }
+            else
+            {
+                if (!formData.confirmPassword) {
+                    errorsArr.push('Password Confirmation is Required!');
+                }
+                else if (formData.password !== formData.confirmPassword) {
+                    errorsArr.push('Passwords do NOT match!');
+                }
+            }
+
+            return errorsArr;
+        }
+
 
         function getAvengerCount() {
             var count = 0;
@@ -53,22 +118,6 @@
             }
         }
 
-        function getAvengersCast() {
-            var cast = [
-                {name: 'Robert Downey Jr.', character: 'Tony Stark / Iron Man'},
-                {name: 'Chris Hemsworth', character: 'Thor'},
-                {name: 'Chris Evans', character: 'Steve Rogers / Captain America'},
-                {name: 'Mark Ruffalo', character: 'Bruce Banner / The Hulk'},
-                {name: 'Scarlett Johansson', character: 'Natasha Romanoff / Black Widow'},
-                {name: 'Jeremy Renner', character: 'Clint Barton / Hawkeye'},
-                {name: 'Gwyneth Paltrow', character: 'Pepper Potts'},
-                {name: 'Samuel L. Jackson', character: 'Nick Fury'},
-                {name: 'Paul Bettany', character: 'Jarvis'},
-                {name: 'Tom Hiddleston', character: 'Loki'},
-                {name: 'Clark Gregg', character: 'Agent Phil Coulson'}
-            ];
-            return $q.when(cast);
-        }
 
         function prime() {
             // This function can only be called once.
@@ -81,9 +130,10 @@
 
             function success() {
                 isPrimed = true;
-                logger.info('Primed data');
+                logger.info('Primed data??');
             }
         }
+
 
         function ready(nextPromises) {
             var readyPromise = primePromise || prime();
