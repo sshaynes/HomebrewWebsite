@@ -5,9 +5,9 @@
         .module('app.user')
         .controller('User', User);
 
-    User.$inject = ['$q', '$location', 'config', 'logger', 'UserRepository', 'CLIENT_URLS'];
+    User.$inject = ['$q', '$location', '$timeout', 'config', 'logger', 'UserRepository', 'CLIENT_URLS'];
 
-    function User($q, $location, config, logger, UserRepository, CLIENT_URLS) {
+    function User($q, $location, $timeout, config, logger, UserRepository, CLIENT_URLS) {
         /*jshint validthis: true */
         var vm = this;
         vm.userRegister = userRegister;
@@ -47,22 +47,20 @@
             // No errors, register user
             if(errorsArr.length == 0) {
 
-                logger.info("userRegister client side validation has passed!");
+                logger.info("userRegister() client-side validation has passed!");
 
                 UserRepository.createNewUserAccount(formData).then(function (response){
-                    response = response.data;
+                    //Success, redirect to profile page
+                    $location.path(CLIENT_URLS.userProfile);
 
-                    // Extract the value and create an array of status codes
-                    if(response.status == 200) {
-                        console.log("Success: " + response.status + " - " + response.message);
-                        $location.path(CLIENT_URLS.userProfile);
-                    }else{
-                        console.log("Fail: " + response.status + " - " + response.message);
+                }, function(response) {
+                    // Valid status code
+                    if(response.status) {
                         errorsArr.push(response.message);
+                    }else{
+                        var errorMsg = "User creation failed! Please try again later."
+                        errorsArr.push(errorMsg);
                     }
-                }, function (response){
-                    console.log("Fail: " + response.status + " - " + response.message);
-                    errorsArr.push(response.message);
                 });
             }
 

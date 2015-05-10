@@ -6,7 +6,7 @@
         .factory('UserRepository', UserRepository);
 
     /* @ngInject */
-    function UserRepository($http, $location, $q, exception, logger) {
+    function UserRepository($http, $location, $q, exception, logger, API_URLS) {
         var isPrimed = false;
         var primePromise;
 
@@ -40,9 +40,11 @@
          * @return object response - contains a status code and a message
          */
         function createNewUserAccount(formData) {
+            var defer = $q.defer();
+
             // Testing User Create API
-            return $http({
-                url: 'user/create/',
+            $http({
+                url: API_URLS.userCreate,
                 method: "POST",
                 data:
                 {
@@ -57,18 +59,20 @@
             }).
             success(function (response) {
                 if(response.status == 200){
-                    logger.success("User creation was successful!\n" + response);
-                    return {status: response.status, message: response.message};
+                    logger.success("User creation was successful!");
+                    defer.resolve({status: response.status, message: response.message});
                 }
                 else {
                     logger.error("User creation failed!\n" + response.status + ": " + response.message);
-                    return $q.reject({status: response.status, message: response.message});
+                    defer.reject({status: response.status, message: response.message});
                 }
             }).
             error(function(response) {
-                logger.error("User creation API call failed!\n" + response.status + ": " + response.message);
-                return $q.reject(data);
+                logger.error("User creation API call failed!");
+                defer.reject(response);
             });
+
+            return defer.promise;
         }
 
 
