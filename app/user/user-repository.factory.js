@@ -58,17 +58,11 @@
                 },
             }).
             success(function (response) {
-                if(response.status == 200){
-                    logger.success("User creation was successful!");
-                    defer.resolve({status: response.status, message: response.message});
-                }
-                else {
-                    logger.error("User creation failed!\n" + response.status + ": " + response.message);
-                    defer.reject({status: response.status, message: response.message});
-                }
+                logger.success("User creation was successful!");
+                defer.resolve(response);
             }).
             error(function(response) {
-                logger.error("User creation API call failed!");
+                logger.error("User creation failed!\n" + response.status + ": " + response.message);
                 defer.reject(response);
             });
 
