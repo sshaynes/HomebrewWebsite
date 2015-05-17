@@ -23,7 +23,8 @@
         // 'app.dashboard',
         'app.layout',
         'app.home',
-        'app.user'
+        'app.user',
+        'shared.auth'
     ]);
 
 })();
