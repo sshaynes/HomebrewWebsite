@@ -3,10 +3,10 @@
 
     angular
         .module('app.user')
-        .factory('UserRepository', UserRepository);
+        .factory('userRepository', userRepository);
 
     /* @ngInject */
-    function UserRepository($http, $location, $q, exception, logger, API_URLS) {
+    function userRepository($http, $location, $q, exception, logger, API_URLS) {
         var isPrimed = false;
         var primePromise;
 

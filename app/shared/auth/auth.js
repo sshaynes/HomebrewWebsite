@@ -5,9 +5,9 @@
         .module('shared.auth')
         .controller('Auth', Auth);
 
-    Auth.$inject = ['$q', '$location', '$timeout', 'config', 'logger', 'CLIENT_URLS', 'UserRepository', 'authService'];
+    Auth.$inject = ['$q', '$location', 'logger', 'CLIENT_URLS', 'authService'];
 
-    function Auth($q, $location, $timeout, config, logger, CLIENT_URLS, UserRepository, authService) {
+    function Auth($q, $location, logger, CLIENT_URLS, authService) {
         /*jshint validthis: true */
         var vm = this;
 
@@ -21,9 +21,6 @@
 
         // Setup and activate the module
         function activate() {
-            UserRepository.getUserProfileData(madeUpUserId).then(function(data){
-                vm.userProfile = data;
-            });
 
             logger.info('Activated Auth Module.');
         }

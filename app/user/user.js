@@ -5,9 +5,9 @@
         .module('app.user')
         .controller('User', User);
 
-    User.$inject = ['$q', '$location', '$timeout', 'config', 'logger', 'UserRepository', 'CLIENT_URLS'];
+    User.$inject = ['$q', '$location', 'logger', 'CLIENT_URLS', 'userRepository'];
 
-    function User($q, $location, $timeout, config, logger, UserRepository, CLIENT_URLS) {
+    function User($q, $location, logger, CLIENT_URLS, userRepository) {
         /*jshint validthis: true */
         var vm = this;
         vm.userRegister = userRegister;
@@ -20,7 +20,7 @@
 
         // Setup and activate the module
         function activate() {
-            UserRepository.getUserProfileData(madeUpUserId).then(function(data){
+            userRepository.getUserProfileData(madeUpUserId).then(function(data){
                 vm.userProfile = data;
             });
 
@@ -42,14 +42,14 @@
         {
             var errorsArr = [];
 
-            errorsArr = UserRepository.validateUserRegistration(formData);
+            errorsArr = userRepository.validateUserRegistration(formData);
 
             // No errors, register user
             if(errorsArr.length == 0) {
 
                 logger.info("userRegister() client-side validation has passed!");
 
-                UserRepository.createNewUserAccount(formData).then(function (response){
+                userRepository.createNewUserAccount(formData).then(function (response){
                     //Success, redirect to profile page
                     $location.path(CLIENT_URLS.userProfile);
 

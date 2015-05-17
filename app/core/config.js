@@ -37,8 +37,8 @@
         routehelperConfigProvider.config.docTitle = config.appTitle + ': ';
 
         var resolveAlways = { /* @ngInject */
-            ready: function(UserRepository) {
-                return UserRepository.ready();
+            ready: function(userRepository) {
+                return userRepository.ready();
             }
         };
         routehelperConfigProvider.config.resolveAlways = resolveAlways;
